@@ -53,7 +53,7 @@ const MainClient = ({
             (typeof errorResponse?.data?.message === "string" &&
               errorResponse?.data?.message) ||
             "Something went wrong",
-          icon: <ExclamationCircleOutlined />,
+          icon: ExclamationCircleOutlined(),
           className: "error-popup",
         });
       }
