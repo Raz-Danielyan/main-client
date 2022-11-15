@@ -1,0 +1,15 @@
+.error-popup .anticon{
+    color:#DE1010 !important;
+    margin-top: 5px;
+    
+}
+.error-popup .ant-modal-confirm-btns{
+    margin-top: 15px !important;
+}
+.error-popup     .ant-btn-default{
+  display: none;
+}
+.error-popup .ant-btn-primary{
+    background-color: #DE1010 !important;
+}
+  
