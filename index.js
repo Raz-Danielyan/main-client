@@ -63,4 +63,4 @@ const MainClient = ({
   return service;
 };
 
-module.exports = MainClient;
+export default MainClient;
