@@ -1,6 +1,6 @@
-import axios from "axios";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { Modal } from "antd";
+const axios = require("axios");
+const { ExclamationCircleOutlined } = require("@ant-design/icons");
+const { Modal } = require("antd");
 import "./global.css";
 
 const { confirm } = Modal;

@@ -23,7 +23,7 @@ I add this for future changes if you have any suggestion I`m free to talk,
 
 ## Usage
 
-this is a basic example how you can configure your main-client
+this is a basic example how you can configure your main-client, you should have installed antD and axios
 
 ```javascript
 import MainClient from "main-client";
