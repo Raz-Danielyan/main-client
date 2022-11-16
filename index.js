@@ -12,7 +12,7 @@ const APIProvider = ({ headers = {}, accessToken, statusHandler, type }) => {
   });
 
   return function (url) {
-    return type
+    return type?.length
       ? type.map((item) => customApi(url)?.[item])
       : Object.values(customApi(url));
   };
