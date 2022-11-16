@@ -1,14 +1,14 @@
-import MainClient from "./MainClient";
+import MainClient from "./MainClient.js";
 
 const APIProvider = ({ headers = {}, accessToken, statusHandler }) => {
   const client = MainClient({ headers, accessToken, statusHandler });
 
   const customApi = (url) => ({
-    getMany: client().get(url, { params }),
-    getOne: client().get(`${url}/${id}`, { params }),
-    update: client().put(`${url}/${params.id}`, params.values),
-    add: client().post(url, data),
-    delete: client().delete(`${url}/${params.id}`, { params }),
+    getMany: (params) => client.get(url, { params }),
+    getOne: ({ id, ...params }) => client.get(`${url}/${id}`, { params }),
+    update: (params) => client.put(`${url}/${params.id}`, params.values),
+    add: (data) => client.post(url, data),
+    delete: (params) => client.delete(`${url}/${params.id}`, { params }),
   });
 
   return function (url, type) {
