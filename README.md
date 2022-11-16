@@ -47,7 +47,7 @@ const headers = {
   isAdmin: 'true'
 };
 
-const provider = APIProvider({ headers, accessToken, statusHandler, type });
+const provider = APIProvider({ headers, accessToken, statusHandler });
 
-const [fetchAllUnitsApi, updateUnitApi] = provider('units');
+const [fetchAllUnitsApi, updateUnitApi] = provider('units', type);
 ```

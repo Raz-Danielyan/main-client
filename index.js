@@ -1,6 +1,6 @@
 import MainClient from "./MainClient";
 
-const APIProvider = ({ headers = {}, accessToken, statusHandler, type }) => {
+const APIProvider = ({ headers = {}, accessToken, statusHandler }) => {
   const client = MainClient({ headers, accessToken, statusHandler });
 
   const customApi = (url) => ({
@@ -11,7 +11,7 @@ const APIProvider = ({ headers = {}, accessToken, statusHandler, type }) => {
     delete: client().delete(`${url}/${params.id}`, { params }),
   });
 
-  return function (url) {
+  return function (url, type) {
     return type?.length
       ? type.map((item) => customApi(url)?.[item])
       : Object.values(customApi(url));
