@@ -1,52 +1,53 @@
 # Main Client
 
-This is customizing Axios code witch will help you to forget about some messy and not understandable code. Tt's clean and easy working code ** and it will put the world in the better place:) **
+This customizing Axios code will help you forget messy and not understandable code. It's clean and easy-working code ** and it will make the world a better place:) **
 
 ## Props
 
-- headers => headers is a prop for write headers in request, for example when you want to add Authorization,
-- API_ROOT => it`a a base APi of your API. For example https://www.youtube.com/watch?v=a8CwpGARAsQ this is whole API and https://www.youtube.com is base API,
-- routes => It's routes of object for your APP navigate. if you don`t have object with your routes you can just put.
+- headers => headers is a prop for writing headers in the request, for example when you want to add Authorization in your request header,
+- statusHandler => It`s object with functions for error response statuses, for example in 404 error you should have a object
 
 ```javascript
 {
-  notFound: {
-    pathname: `your path to not found page`;
-  }
+  on404: () => {
+    // do something when 404 error occurs.
+  };
 }
 ```
 
-I add this for future changes if you have any suggestion I`m free to talk,
+as you already understand it's understood from the object name the error status and the function will work only in that status always, it's should starts with ** on ** and the default error responding key is "defaultErrHandler".
 
-- getAccessToken => getAccessToken is a function for getting the Authorization token,
-- emptyState => emptyState is a function for clean your state, it`s working when you getting 401 error,
+- accessToken => accessToken is a string for getting the Authorization token,
+- type => the type is an array to get the user API, for example, if the type is ['update'], it will return only the Promise function to update the backend. by default it will return all methods. And options are (getMany, getOne, update, add, delete).
 
 ## Usage
+
+- API_ROOT => It's a base API of your API. For example https://www.youtube.com/watch?v=a8CwpGARAsQ this is whole API and https://www.youtube.com is base API, and you should add API_ROOT in your `.env` file,
+- Provider => Provider helps you to customize your API, and after initialization of the Provider you can add an endpoint.
 
 this is a basic example how you can configure your main-client
 
 ```javascript
-import MainClient from "main-client";
+import APIProvider from "main-client";
 
-const API_ROOT = "https://www.youtube.com";
+const accessToken = 'qwe123';
 
-const routes = {
-  notFound: {
-    pathname: `/not not-found`,
-  },
+const statusHandler={
+  on404:()=>{
+    //  do something when 404 error occurs.
+  }
+  defaultErrHandler:()=>{
+    //  do something when error occurs.
+  }
+}
+
+const type = ['getMany','update'];
+
+const headers = {
+  isAdmin: 'true'
 };
 
-export const emptyState = () => {
-  localStorage.removeItem("user");
-};
+const provider = APIProvider({ headers, accessToken, statusHandler, type });
 
-export const getAccessToken = () => {
-  const state = loadState();
-  return (state && state.jwt) || "";
-};
-
-// eslint-disable-next-line import/no-anonymous-default-export
-export default (headers = {}) => {
-  return MainClient({ headers, API_ROOT, routes, getAccessToken, emptyState });
-};
+const [fetchAllUnitsApi, updateUnitApi] = provider('units');
 ```
