@@ -11,9 +11,9 @@ const APIProvider = ({ headers = {}, accessToken, statusHandler }) => {
     delete: (params) => client.delete(`${url}/${params.id}`, { params }),
   });
 
-  return function (url, type) {
-    return type?.length
-      ? type.map((item) => customApi(url)?.[item])
+  return function (url, types) {
+    return types?.length
+      ? types.map((item) => customApi(url)?.[item])
       : Object.values(customApi(url));
   };
 };

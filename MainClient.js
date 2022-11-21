@@ -26,7 +26,11 @@ const MainClient = ({ headers, accessToken, statusHandler }) => {
       if (errorResponse?.status) {
         let statusFound = false;
         Object.keys(statusHandler).map((item) => {
-          if (errorResponse?.status === Number(item.slice(2))) {
+          if (!/^on\d{3}$/.test(item)) {
+            console.error(
+              "the status type is incorrect, please follow this example 'on404'"
+            );
+          } else if (errorResponse?.status === Number(item.slice(2))) {
             statusHandler?.[item]?.();
             statusFound = true;
           }
