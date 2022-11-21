@@ -31,12 +31,12 @@ const MainClient = ({ headers, accessToken, statusHandler }) => {
               "the status type is incorrect, please follow this example 'on404'"
             );
           } else if (errorResponse?.status === Number(item.slice(2))) {
-            statusHandler?.[item]?.();
+            statusHandler?.[item]?.(error);
             statusFound = true;
           }
         });
         if (!statusFound) {
-          statusHandler?.defaultErrHandler();
+          statusHandler?.defaultErrHandler(error);
         }
       }
 
